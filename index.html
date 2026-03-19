@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework #3 - Tax Calculator Layout</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="main-header">
+            <div class="theme-switch-wrapper">
+                <span id="themeLabel">🌙</span>
+                <label class="theme-switch" for="checkbox">
+                    <input type="checkbox" id="checkbox" />
+                    <div class="slider round"></div>
+                </label>
+            </div>
+        </header>
+
+        <section class="tax-calculator card">
+            <h2>โปรแกรมคำนวณภาษีเงินได้บุคคลธรรมดา</h2>
+            
+            <div class="tax-content">
+                <div class="input-panel">
+                    <div class="income-header">
+                        <label>รายได้ (บาท)</label>
+                        <div class="action-buttons">
+                            <button id="addBtn" class="btn btn-icon btn-add" title="เพิ่มช่องรายได้">+</button>
+                            <button id="removeBtn" class="btn btn-icon btn-remove" title="ลดช่องรายได้">-</button>
+                        </div>
+                    </div>
+                    
+                    <div id="incomeInputsContainer">
+                        <div class="input-group">
+                            <input type="text" class="income-input" placeholder="กรอกรายได้..." autocomplete="off">
+                        </div>
+                    </div>
+                    
+                    <div id="warningMessage" class="warning-text hidden">
+                        * มีรายได้บางรายการเป็นค่าติดลบ หรือไม่ใช่ตัวเลข
+                    </div>
+
+                    <hr class="divider">
+
+                    <div class="result-group">
+                        <label>รายได้รวม (บาท)</label>
+                        <input type="text" id="totalIncome" readonly placeholder="0.00">
+                    </div>
+                    
+                    <div class="result-group">
+                        <label>อัตราภาษีสูงสุดที่ตกเกณฑ์ (%)</label>
+                        <input type="text" id="taxRate" readonly placeholder="0%">
+                    </div>
+                    
+                    <div class="result-group highlight">
+                        <label>ภาษีที่ต้องจ่าย (บาท)</label>
+                        <input type="text" id="totalTax" readonly placeholder="0.00">
+                    </div>
+                </div>
+
+                <div class="info-panel">
+                    <h3>ตารางอัตราภาษีใหม่</h3>
+                    <table class="tax-table">
+                        <thead>
+                            <tr>
+                                <th>เงินได้สุทธิต่อปี</th>
+                                <th>อัตราภาษี</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>0 - 150,000 บาท</td><td>ได้รับการยกเว้น</td></tr>
+                            <tr><td>150,001 - 300,000 บาท</td><td>5%</td></tr>
+                            <tr><td>300,001 - 500,000 บาท</td><td>10%</td></tr>
+                            <tr><td>500,001 - 750,000 บาท</td><td>15%</td></tr>
+                            <tr><td>750,001 - 1,000,000 บาท</td><td>20%</td></tr>
+                            <tr><td>1,000,001 - 2,000,000 บาท</td><td>25%</td></tr>
+                            <tr><td>2,000,001 - 5,000,000 บาท</td><td>30%</td></tr>
+                            <tr><td>5,000,001 บาทขึ้นไป</td><td>35%</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div id="timeDisplay" class="time-display">กำลังโหลดเวลา...</div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

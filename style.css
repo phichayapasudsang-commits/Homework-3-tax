@@ -1,0 +1,297 @@
+/* ตัวแปรสีสำหรับโหมดสว่าง (ค่าเริ่มต้น) */
+:root {
+    --bg-color: #f4f7f6;
+    --text-color: #333333;
+    --card-bg: #ffffff;
+    --border-color: #dddddd;
+    --primary-color: #2c3e50;
+    --accent-color: #3498db;
+    --success-color: #2ecc71;
+    --danger-color: #e74c3c;
+    --table-header: #1abc9c;
+    --table-row-alt: #f9f9f9;
+    --footer-bg: #e0e0e0;
+    --footer-text: #666666;
+}
+
+/* ตัวแปรสีสำหรับโหมดมืด (Dark Mode) */
+body.dark-mode {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --card-bg: #1e1e1e;
+    --border-color: #333333;
+    --primary-color: #ecf0f1;
+    --accent-color: #2980b9;
+    --table-header: #16a085;
+    --table-row-alt: #2a2a2a;
+    --footer-bg: #1e1e1e;
+    --footer-text: #999999;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Prompt', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0; /
+}
+
+
+.container {
+    width: 100%;
+    max-width: 100%; /* เปลี่ยนจากตัวเลข px เป็น 100% */
+    padding: 0 1.5rem;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    flex: 1; /* ดันเนื้อหาให้เต็มแนวตั้ง */
+}
+
+/* --- Header & Theme Switch --- */
+.main-header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.75rem 0; /* ลดความสูงส่วนโหมดมืดลง */
+}
+
+.theme-switch-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.theme-switch {
+    display: inline-block;
+    height: 26px;
+    position: relative;
+    width: 50px;
+}
+
+.theme-switch input {
+    display: none;
+}
+
+.slider {
+    background-color: #ccc;
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: .4s;
+}
+
+.slider:before {
+    background-color: #fff;
+    bottom: 4px;
+    content: "";
+    height: 18px;
+    left: 4px;
+    position: absolute;
+    transition: .4s;
+    width: 18px;
+}
+
+input:checked + .slider {
+    background-color: var(--accent-color);
+}
+
+input:checked + .slider:before {
+    transform: translateX(24px);
+}
+
+.slider.round {
+    border-radius: 26px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* --- Tax Calculator Card --- */
+.card {
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    border: 1px solid var(--border-color);
+    flex: 1; /* สั่งให้กรอบขาวขยายความสูงเต็มจอ */
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem; /* เว้นระยะห่างจาก Footer ด้านล่างนิดหน่อย */
+}
+
+h2 {
+    margin-top: 0; /* ลบระยะห่างด้านบนให้ชิดขอบกรอบขาว */
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.75rem;
+    text-align: left; /* บังคับข้อความชิดซ้าย */
+    width: 100%;
+}
+
+/* --- Buttons --- */
+.btn {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    transition: opacity 0.2s, transform 0.1s;
+}
+
+.btn-icon {
+    width: 35px;
+    height: 35px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.btn-add { background-color: var(--success-color); }
+.btn-remove { background-color: var(--danger-color); }
+
+/* --- Calculator Layout --- */
+.tax-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem; /* ขยายช่องว่างตรงกลาง (จากเดิม 2rem) ให้ดูไม่อึดอัด */
+    align-items: flex-start;
+}
+
+@media (max-width: 768px) {
+    .tax-content {
+        grid-template-columns: 1fr; 
+    }
+}
+
+.income-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.input-group, .result-group {
+    margin-bottom: 12px; /* ลดจาก 15px */
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group input, .result-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 1rem;
+    background-color: var(--card-bg);
+    color: var(--text-color);
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+.result-group input[readonly] {
+    background-color: var(--bg-color);
+    font-weight: 600;
+    cursor: not-allowed;
+}
+
+.result-group.highlight input {
+    color: var(--danger-color);
+    font-size: 1.2rem;
+}
+
+.divider {
+    border: 0;
+    height: 1px;
+    background: var(--border-color);
+    margin: 15px 0; /* ลดจาก 20px */
+}
+
+.warning-text {
+    color: var(--danger-color);
+    font-size: 0.85rem;
+    margin-top: -5px;
+    margin-bottom: 10px;
+}
+
+.hidden {
+    display: none;
+}
+
+/* --- Tax Table --- */
+.info-panel h3 {
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.tax-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+.tax-table th, .tax-table td {
+    padding: 8px; /* ลดจาก 10px */
+    border: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.tax-table th {
+    background-color: var(--table-header);
+    color: white;
+}
+
+.tax-table tr:nth-child(even) {
+    background-color: var(--table-row-alt);
+}
+
+/* --- Footer & Time Display --- */
+.main-footer {
+    background-color: var(--footer-bg);
+    color: var(--footer-text);
+    padding: 1rem 0; /* ลดความสูง Footer ลง */
+    margin-top: 0;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.footer-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.time-display {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.time-error {
+    color: var(--danger-color) !important;
+}
